@@ -1,8 +1,8 @@
 package com.projeto_aws.Inventarioti.controller;
 
 import com.projeto_aws.Inventarioti.domain.Departamento;
-import com.projeto_aws.Inventarioti.dto.DepartamentoDTO.AtualizarDepartamentoDTO;
-import com.projeto_aws.Inventarioti.dto.DepartamentoDTO.CriarDepartamentoDTO;
+import com.projeto_aws.Inventarioti.dto.departamentoDTO.AtualizarDepartamentoDTO;
+import com.projeto_aws.Inventarioti.dto.departamentoDTO.CriarDepartamentoDTO;
 import com.projeto_aws.Inventarioti.service.DepartamentoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

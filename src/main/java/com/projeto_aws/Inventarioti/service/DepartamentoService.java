@@ -1,8 +1,8 @@
 package com.projeto_aws.Inventarioti.service;
 
 import com.projeto_aws.Inventarioti.domain.Departamento;
-import com.projeto_aws.Inventarioti.dto.DepartamentoDTO.AtualizarDepartamentoDTO;
-import com.projeto_aws.Inventarioti.dto.DepartamentoDTO.CriarDepartamentoDTO;
+import com.projeto_aws.Inventarioti.dto.departamentoDTO.AtualizarDepartamentoDTO;
+import com.projeto_aws.Inventarioti.dto.departamentoDTO.CriarDepartamentoDTO;
 import com.projeto_aws.Inventarioti.repository.DepartamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
