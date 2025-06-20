@@ -1,8 +1,10 @@
 package com.projeto_aws.Inventarioti.controller;
 
 import com.projeto_aws.Inventarioti.domain.RelacionamentoGeral;
+import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.AtualizarRelacionamentoDTO;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.CriarRelacionamentoDTO;
 import com.projeto_aws.Inventarioti.service.RelacionamentoGeralService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,18 @@ public class RelacionamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<RelacionamentoGeral> criarRelacionamento(@RequestBody CriarRelacionamentoDTO relacionamento){
+    public ResponseEntity<RelacionamentoGeral> criarRelacionamento(@RequestBody @Valid CriarRelacionamentoDTO relacionamento){
         var novoRecionamento = relacionamentoGeralService.criarRelacionamento(relacionamento);
         return ResponseEntity.ok(novoRecionamento);
     }
 
+    @PutMapping
+    public ResponseEntity<RelacionamentoGeral> atualizarRelacionamento(@RequestBody @Valid AtualizarRelacionamentoDTO relacionamento){
+        var atualizaRelacionamento = relacionamentoGeralService.atualizarRelacionamento(relacionamento);
+        return ResponseEntity.ok(atualizaRelacionamento);
+    }
 
-
-    @DeleteMapping("/{idRelacionamento")
+    @DeleteMapping("/{idRelacionamento}")
     public ResponseEntity deletarRelacionamento(@PathVariable Long idRelacionamento){
         relacionamentoGeralService.deletarRelacionamento(idRelacionamento);
         return ResponseEntity.noContent().build();

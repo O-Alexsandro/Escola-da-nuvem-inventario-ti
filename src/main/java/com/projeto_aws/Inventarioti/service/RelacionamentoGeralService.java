@@ -1,7 +1,7 @@
 package com.projeto_aws.Inventarioti.service;
 
 import com.projeto_aws.Inventarioti.domain.RelacionamentoGeral;
-import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.AtualizarRelacionamento;
+import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.AtualizarRelacionamentoDTO;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.CriarRelacionamentoDTO;
 import com.projeto_aws.Inventarioti.repository.RelacionamentoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,6 +16,21 @@ public class RelacionamentoGeralService {
     @Autowired
     private RelacionamentoRepository relacionamentoRepository;
 
+    @Autowired
+    private DepartamentoService departamentoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private MaquinaService maquinaService;
+
+    @Autowired
+    private SoftwareService softwareService;
+
+    @Autowired
+    private SuprimentoService suprimentoService;
+
     public List<RelacionamentoGeral> listarRelacionamentos(){
         return relacionamentoRepository.findAll();
     }
@@ -25,24 +40,35 @@ public class RelacionamentoGeralService {
         return relacionamentoRepository.save(novoRelacionamento);
     }
 
-    public RelacionamentoGeral atualizarRelacionamento(AtualizarRelacionamento relacionamento){
+    public RelacionamentoGeral atualizarRelacionamento(AtualizarRelacionamentoDTO relacionamento){
         RelacionamentoGeral atualizaRelacionamento = relacionamentoRepository.findById(relacionamento.idRelacionamento()).orElseThrow(()-> new EntityNotFoundException("Relacionamento não encontrado com o ID informado"));
 
-        // avaliar se é necessário chamar os metodos de atualizar de cada entidade.
-
-        if (relacionamento.idUsuario() != null){
-
+        // Se o departamento não estiver nulo,
+        // ele chama o metodo de atualizar o departamento e atualiza conforme os dados passados
+        if (relacionamento.departamento() != null){
+            departamentoService.atualizarDepartamento(relacionamento.departamento());
         }
 
-        return null;
+        if (relacionamento.usuario() != null){
+            usuarioService.atualizarUsuario(relacionamento.usuario());
+        }
+
+        if (relacionamento.maquina() != null){
+            maquinaService.atualizarMaquina(relacionamento.maquina());
+        }
+
+        if (relacionamento.software() != null){
+            softwareService.atualizarSoftware(relacionamento.software());
+        }
+
+        if (relacionamento.suprimento() != null){
+            suprimentoService.atualizarSuprimento(relacionamento.suprimento());
+        }
+        return relacionamentoRepository.save(atualizaRelacionamento);
     }
 
     public void deletarRelacionamento(Long idRelacionamento){
         RelacionamentoGeral atualizaRelacionamento = relacionamentoRepository.findById(idRelacionamento).orElseThrow(()-> new EntityNotFoundException("Relacionamento não encontrado com o ID informado"));
         relacionamentoRepository.delete(atualizaRelacionamento);
     }
-
-
-
-
 }
