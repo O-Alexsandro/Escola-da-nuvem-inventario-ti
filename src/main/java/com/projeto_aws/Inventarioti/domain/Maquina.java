@@ -10,13 +10,15 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "idMaquina")
 public class Maquina {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idMaquina;
+    @Column(length = 100)
     private String placaMae;
+    //Inserir ENUM de INTEL ou AMD
     private String processador;
     private String modeloMemoria;
     private String frequenciaMemoria;

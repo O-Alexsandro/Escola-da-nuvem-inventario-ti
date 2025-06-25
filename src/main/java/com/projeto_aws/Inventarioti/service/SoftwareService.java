@@ -29,11 +29,11 @@ public class SoftwareService {
         Software atualizaSoftware = softwareRepository.findById(software.idSoftware()).orElseThrow(()-> new EntityNotFoundException("Software não encontrado com o id informado"));
 
         if (software.nome() != null){
-            atualizaSoftware.setNomeSuprimento(software.nome());
+            atualizaSoftware.setNomeSoftware(software.nome());
         }
 
         if (software.descricao() != null){
-            atualizaSoftware.setDescricaoSuprimento(software.descricao());
+            atualizaSoftware.setSoftwareSerial(software.descricao());
         }
 
         return softwareRepository.save(atualizaSoftware);

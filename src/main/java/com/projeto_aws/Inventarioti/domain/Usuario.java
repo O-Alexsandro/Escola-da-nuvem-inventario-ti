@@ -15,6 +15,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsusario;
+    @Column(length = 100)
     private String nomeUsuario;
     @ManyToOne
     @JoinColumn(name = "idDepartamento")

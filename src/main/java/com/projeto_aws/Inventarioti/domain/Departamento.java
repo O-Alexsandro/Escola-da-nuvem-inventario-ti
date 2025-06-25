@@ -19,6 +19,7 @@ public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDepartamento;
+    @Column(length = 100)
     private String nomeDepartamento;
 
     public Departamento(CriarDepartamentoDTO departamento) {

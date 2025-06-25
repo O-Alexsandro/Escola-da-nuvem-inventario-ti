@@ -47,10 +47,10 @@ public class RelacionamentoGeral {
         usuario.setIdUsusario(relacionamento.idUsuario());
 
         this.maquina = new Maquina();
-        maquina.setId(relacionamento.idMaquina());
+        maquina.setIdMaquina(relacionamento.idMaquina());
 
         this.software = new Software();
-        software.setId(relacionamento.idSoftware());
+        software.setIdSoftware(relacionamento.idSoftware());
 
         this.suprimento = new Suprimento();
         suprimento.setIdSuprimento(relacionamento.idSuprimento());

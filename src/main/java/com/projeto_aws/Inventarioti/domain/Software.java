@@ -15,12 +15,14 @@ public class Software {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String nomeSuprimento;
-    private String descricaoSuprimento;
+    private long idSoftware;
+    @Column(length = 100)
+    private String nomeSoftware;
+    @Column(length = 100)
+    private String softwareSerial;
 
     public Software(CriarSoftwareDTO software) {
-        this.nomeSuprimento = software.nome();
-        this.descricaoSuprimento = software.descricao();
+        this.nomeSoftware = software.nome();
+        this.softwareSerial = software.descricao();
     }
 }

@@ -16,6 +16,7 @@ public class Suprimento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSuprimento;
+    @Column(length = 100)
     private String nomeSuprimento;
     private String descricaoSuprimento;
 
