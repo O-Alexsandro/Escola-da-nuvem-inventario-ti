@@ -1,4 +1,4 @@
-package com.projeto_aws.Inventarioti.domain;
+package com.projeto_aws.Inventarioti.domain.maquina;
 
 import com.projeto_aws.Inventarioti.dto.maquinaDTO.CriarMaquinaDTO;
 import jakarta.persistence.*;
@@ -16,18 +16,35 @@ public class Maquina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMaquina;
+
     @Column(length = 100)
     private String placaMae;
-    //Inserir ENUM de INTEL ou AMD
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 5)
+    private MarcaProcessador marcaProcessador;
+
+    @Column(length = 100)
     private String processador;
-    private String modeloMemoria;
-    private String frequenciaMemoria;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 4)
+    private ModeloMemoria modeloMemoria;
+
+    @Column(length = 6)
+    private FrequenciaMemoria frequenciaMemoria;
+
     private Long quantidadeMemoria;
-    private String tipoArmazenamento;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 4)
+    private TipoArmazenamento tipoArmazenamento;
+
     private Long quantidadeArmazenamento;
 
     public Maquina(CriarMaquinaDTO maquina) {
         this.placaMae = maquina.placaMae();
+        this.marcaProcessador = maquina.marcaProcessador();
         this.processador = maquina.processador();
         this.modeloMemoria = maquina.modeloMemoria();
         this.frequenciaMemoria = maquina.frequenciaMemoria();

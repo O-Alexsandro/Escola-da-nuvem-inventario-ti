@@ -1,6 +1,7 @@
 package com.projeto_aws.Inventarioti.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projeto_aws.Inventarioti.domain.maquina.Maquina;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.CriarRelacionamentoDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,7 +17,7 @@ public class RelacionamentoGeral {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idRelacionamento;
 
     @ManyToOne
     @JsonIgnore

@@ -1,6 +1,6 @@
 package com.projeto_aws.Inventarioti.controller;
 
-import com.projeto_aws.Inventarioti.domain.Maquina;
+import com.projeto_aws.Inventarioti.domain.maquina.Maquina;
 import com.projeto_aws.Inventarioti.dto.maquinaDTO.AtualizarMaquinaDTO;
 import com.projeto_aws.Inventarioti.dto.maquinaDTO.CriarMaquinaDTO;
 import com.projeto_aws.Inventarioti.service.MaquinaService;
