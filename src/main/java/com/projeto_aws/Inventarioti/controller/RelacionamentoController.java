@@ -26,6 +26,7 @@ public class RelacionamentoController {
         return ResponseEntity.ok(relacionamentos);
     }
 
+    // Cria o relacionamento a partir de entidades existentes
     @PostMapping
     public ResponseEntity<RelacionamentoGeral> criarRelacionamento(@RequestBody @Valid CriarRelacionamentoDTO relacionamento){
         var novoRecionamento = relacionamentoGeralService.criarRelacionamento(relacionamento);
