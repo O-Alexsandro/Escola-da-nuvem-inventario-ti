@@ -21,6 +21,7 @@ public class UsuarioSistema implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario_sistema")
     private Long idUsuarioSistema;
 
     @Column(length = 100)

@@ -1,0 +1,1 @@
+ALTER TABLE usuariossistema RENAME TO usuarios_sistema;
