@@ -32,8 +32,8 @@ public class SoftwareService {
             atualizaSoftware.setNomeSoftware(software.nome());
         }
 
-        if (software.descricao() != null){
-            atualizaSoftware.setSoftwareSerial(software.descricao());
+        if (software.serial() != null){
+            atualizaSoftware.setSoftwareSerial(software.serial());
         }
 
         return softwareRepository.save(atualizaSoftware);

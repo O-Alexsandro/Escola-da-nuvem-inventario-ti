@@ -26,6 +26,16 @@ public class RelacionamentoController {
         return ResponseEntity.ok(relacionamentos);
     }
 
+    @GetMapping("/{idUsuario}")
+    public List<RelacionamentoGeral> buscarPorUsuario(@PathVariable Long idUsuario) {
+        return relacionamentoGeralService.buscarPorIdUsuario(idUsuario);
+    }
+
+    @GetMapping("/itens")
+    public Long totalDeRelacionamento(){
+        return relacionamentoGeralService.quantidadeRegistro();
+    }
+
     // Cria o relacionamento a partir de entidades existentes
     @PostMapping
     public ResponseEntity<RelacionamentoGeral> criarRelacionamento(@RequestBody @Valid CriarRelacionamentoDTO relacionamento){

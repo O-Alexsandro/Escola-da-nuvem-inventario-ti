@@ -35,6 +35,10 @@ public class RelacionamentoGeralService {
         return relacionamentoRepository.findAll();
     }
 
+    public List<RelacionamentoGeral> buscarPorIdUsuario(Long idUsuario) {
+        return relacionamentoRepository.findByUsuarioIdUsusario(idUsuario);
+    }
+
     public RelacionamentoGeral criarRelacionamento(CriarRelacionamentoDTO relacionamento){
         RelacionamentoGeral novoRelacionamento = new RelacionamentoGeral(relacionamento);
         return relacionamentoRepository.save(novoRelacionamento);
@@ -70,5 +74,9 @@ public class RelacionamentoGeralService {
     public void deletarRelacionamento(Long idRelacionamento){
         RelacionamentoGeral atualizaRelacionamento = relacionamentoRepository.findById(idRelacionamento).orElseThrow(()-> new EntityNotFoundException("Relacionamento não encontrado com o ID informado"));
         relacionamentoRepository.delete(atualizaRelacionamento);
+    }
+    // Conta quantos registros tem na tabela de relacionamento
+    public Long quantidadeRegistro(){
+        return relacionamentoRepository.count();
     }
 }

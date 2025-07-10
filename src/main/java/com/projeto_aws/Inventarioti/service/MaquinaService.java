@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MaquinaService {
@@ -18,6 +19,10 @@ public class MaquinaService {
 
     public List<Maquina> listarMaquinas(){
         return maquinaRepository.findAll();
+    }
+
+    public Maquina listarMaquinaPorId(Long idMaquina){
+        return maquinaRepository.findById(idMaquina).orElseThrow(()-> new EntityNotFoundException("Máquina não encontrada com o ID informado"));
     }
 
     public Maquina criarMaquina(CriarMaquinaDTO maquina){

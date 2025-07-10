@@ -6,6 +6,6 @@ public record CriarSoftwareDTO(
         @NotNull
         String nome,
         @NotNull
-        String descricao
+        String serial
 ) {
 }

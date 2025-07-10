@@ -23,6 +23,6 @@ public class Software {
 
     public Software(CriarSoftwareDTO software) {
         this.nomeSoftware = software.nome();
-        this.softwareSerial = software.descricao();
+        this.softwareSerial = software.serial();
     }
 }

@@ -24,6 +24,12 @@ public class MaquinaController {
         return ResponseEntity.ok(maquinas);
     }
 
+    @GetMapping("/{idMaquina}")
+    public ResponseEntity<Maquina> listarMaquinaPorId(@PathVariable Long idMaquina){
+        var maquina = maquinaService.listarMaquinaPorId(idMaquina);
+        return ResponseEntity.ok(maquina);
+    }
+
     @PostMapping
     public ResponseEntity<Maquina> criarMaquina(@RequestBody @Valid CriarMaquinaDTO maquina){
         var novaMaquina = maquinaService.criarMaquina(maquina);

@@ -6,6 +6,6 @@ public record AtualizarSoftwareDTO(
         @NotNull
         Long idSoftware,
         String nome,
-        String descricao
+        String serial
 ) {
 }
