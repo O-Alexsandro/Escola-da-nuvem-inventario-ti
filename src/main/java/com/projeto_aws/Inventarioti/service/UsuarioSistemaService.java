@@ -1,9 +1,11 @@
 package com.projeto_aws.Inventarioti.service;
 
 import com.projeto_aws.Inventarioti.configuration.TokenService;
+import com.projeto_aws.Inventarioti.domain.Usuario;
 import com.projeto_aws.Inventarioti.domain.usuarioSistema.UsuarioSistema;
 import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.AtualizarUsuarioSistemaDTO;
 import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.CriarUsuarioSistemaDTO;
+import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.ResetarSenhaDTO;
 import com.projeto_aws.Inventarioti.repository.UsuarioSistemaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,17 @@ public class UsuarioSistemaService implements UserDetailsService {
     public void deletarUsuario (Long idUsuarioSistema){
         UsuarioSistema usuario = usuarioSistemaRepository.findById(idUsuarioSistema).orElseThrow(()-> new EntityNotFoundException("Usuário não localizado pelo ID informado"));
         usuarioSistemaRepository.delete(usuario);
+    }
+
+    public UsuarioSistema resetarSenha(ResetarSenhaDTO usuarioSistema){
+        UsuarioSistema usuario = usuarioSistemaRepository.findByNomeUsuarioAndEmail(usuarioSistema.nome(), usuarioSistema.email());
+
+        if (usuarioSistema.nome() != null && usuarioSistema.email() != null){
+            String senhaNova = new BCryptPasswordEncoder().encode(usuarioSistema.senha());
+            usuario.setSenha(senhaNova);
+        }
+
+        return usuarioSistemaRepository.save(usuario);
     }
 
     @Override

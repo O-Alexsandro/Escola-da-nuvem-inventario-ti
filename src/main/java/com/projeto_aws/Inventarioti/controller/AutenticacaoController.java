@@ -1,6 +1,8 @@
 package com.projeto_aws.Inventarioti.controller;
 
+import com.projeto_aws.Inventarioti.domain.usuarioSistema.UsuarioSistema;
 import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.LoginDTO;
+import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.ResetarSenhaDTO;
 import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.ResponseTokenDTO;
 import com.projeto_aws.Inventarioti.service.AutenticacaoService;
 import com.projeto_aws.Inventarioti.service.UsuarioSistemaService;
@@ -18,9 +20,18 @@ public class AutenticacaoController {
     @Autowired
     private AutenticacaoService autenticacaoService;
 
+    @Autowired
+    private UsuarioSistemaService usuarioSistemaService;
+
     @PostMapping
     public ResponseEntity<ResponseTokenDTO> login(@RequestBody LoginDTO loginDTO) {
         var login = autenticacaoService.login(loginDTO);
         return ResponseEntity.ok(login);
+    }
+
+    @PostMapping ("/redefinir-senha")
+    public ResponseEntity<UsuarioSistema> resetarSenha(@RequestBody ResetarSenhaDTO resetarDto){
+        var reset = usuarioSistemaService.resetarSenha(resetarDto);
+        return ResponseEntity.ok(reset);
     }
 }
