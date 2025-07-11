@@ -29,7 +29,7 @@ public class RelacionamentoGeralService {
     private SoftwareService softwareService;
 
     @Autowired
-    private SuprimentoService suprimentoService;
+    private PipService pipService;
 
     public List<RelacionamentoGeral> listarRelacionamentos(){
         return relacionamentoRepository.findAll();
@@ -66,7 +66,7 @@ public class RelacionamentoGeralService {
         }
 
         if (relacionamento.suprimento() != null){
-            suprimentoService.atualizarSuprimento(relacionamento.suprimento());
+            pipService.atualizarPib(relacionamento.suprimento());
         }
         return relacionamentoRepository.save(atualizaRelacionamento);
     }

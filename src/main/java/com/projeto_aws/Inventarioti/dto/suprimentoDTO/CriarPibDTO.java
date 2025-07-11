@@ -2,10 +2,10 @@ package com.projeto_aws.Inventarioti.dto.suprimentoDTO;
 
 import jakarta.validation.constraints.NotNull;
 
-public record AtualizarSuprimentoDTO(
+public record CriarPibDTO(
         @NotNull
-        Long id,
         String nome,
+        @NotNull
         String descricao
 ) {
 }

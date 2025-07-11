@@ -30,6 +30,11 @@ public class MaquinaController {
         return ResponseEntity.ok(maquina);
     }
 
+    @GetMapping("/itens")
+    public Long quantidadeMaquinas(){
+        return maquinaService.quantidadeMaquinas();
+    }
+
     @PostMapping
     public ResponseEntity<Maquina> criarMaquina(@RequestBody @Valid CriarMaquinaDTO maquina){
         var novaMaquina = maquinaService.criarMaquina(maquina);

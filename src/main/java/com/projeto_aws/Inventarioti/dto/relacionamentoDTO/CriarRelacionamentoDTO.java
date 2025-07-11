@@ -11,5 +11,5 @@ public record CriarRelacionamentoDTO(
         @NotNull
         Long idSoftware,
         @NotNull
-        Long idSuprimento
+        Long idPip
 ) {}

@@ -68,4 +68,8 @@ public class MaquinaService {
         maquinaRepository.delete(buscaMaquina);
     }
 
+    public Long quantidadeMaquinas(){
+        return maquinaRepository.count();
+    }
+
 }

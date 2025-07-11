@@ -37,8 +37,8 @@ public class RelacionamentoGeral {
     private Software software;
 
     @ManyToOne
-    @JoinColumn(name = "idSuprimento")
-    private Suprimento suprimento;
+    @JoinColumn(name = "idPip")
+    private Pip pip;
 
     public RelacionamentoGeral(CriarRelacionamentoDTO relacionamento) {
         this.departamento = new Departamento();
@@ -53,7 +53,7 @@ public class RelacionamentoGeral {
         this.software = new Software();
         software.setIdSoftware(relacionamento.idSoftware());
 
-        this.suprimento = new Suprimento();
-        suprimento.setIdSuprimento(relacionamento.idSuprimento());
+        this.pip = new Pip();
+        pip.setIdPip(relacionamento.idPip());
     }
 }
