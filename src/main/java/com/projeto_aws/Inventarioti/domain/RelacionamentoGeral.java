@@ -6,6 +6,8 @@ import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.CriarRelacionamentoDTO
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "relacionamentogeral")
 @Getter
@@ -40,6 +42,9 @@ public class RelacionamentoGeral {
     @JoinColumn(name = "idPip")
     private Pip pip;
 
+    @Column(name = "data_registro")
+    private LocalDate dataRegistro;
+
     public RelacionamentoGeral(CriarRelacionamentoDTO relacionamento) {
         this.departamento = new Departamento();
         departamento.setIdDepartamento(relacionamento.idDepartamento());
@@ -55,5 +60,7 @@ public class RelacionamentoGeral {
 
         this.pip = new Pip();
         pip.setIdPip(relacionamento.idPip());
+
+        this.dataRegistro = LocalDate.now();
     }
 }

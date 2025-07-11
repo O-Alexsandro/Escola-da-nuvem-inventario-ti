@@ -1,0 +1,2 @@
+ALTER TABLE relacionamentogeral
+ADD COLUMN data_registro DATE NOT NULL DEFAULT CURRENT_DATE;

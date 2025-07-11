@@ -79,4 +79,9 @@ public class RelacionamentoGeralService {
     public Long quantidadeRegistro(){
         return relacionamentoRepository.count();
     }
+
+    // retorna o ultimo cadastro de relacionamento
+    public RelacionamentoGeral buscarUltimoCadastro(){
+        return relacionamentoRepository.findFirstByOrderByDataRegistroDesc().orElseThrow(null);
+    }
 }

@@ -36,6 +36,11 @@ public class RelacionamentoController {
         return relacionamentoGeralService.quantidadeRegistro();
     }
 
+    @GetMapping("/cadastro")
+    public ResponseEntity<RelacionamentoGeral> buscarUltimoCadastro(){
+        return ResponseEntity.ok(relacionamentoGeralService.buscarUltimoCadastro());
+    }
+
     // Cria o relacionamento a partir de entidades existentes
     @PostMapping
     public ResponseEntity<RelacionamentoGeral> criarRelacionamento(@RequestBody @Valid CriarRelacionamentoDTO relacionamento){
