@@ -1,8 +1,8 @@
 package com.projeto_aws.Inventarioti.service;
 
 import com.projeto_aws.Inventarioti.domain.Pip;
-import com.projeto_aws.Inventarioti.dto.suprimentoDTO.AtualizarPibDTO;
-import com.projeto_aws.Inventarioti.dto.suprimentoDTO.CriarPibDTO;
+import com.projeto_aws.Inventarioti.dto.pipDTO.AtualizarPibDTO;
+import com.projeto_aws.Inventarioti.dto.pipDTO.CriarPibDTO;
 import com.projeto_aws.Inventarioti.repository.PipRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,6 @@ public class PipService {
             atualizaPip.setNomePip(pip.nome());
         }
 
-        if (pip.descricao() != null){
-            atualizaPip.setDescricaoPip(pip.descricao());
-        }
         return pipRepository.save(atualizaPip);
     }
 

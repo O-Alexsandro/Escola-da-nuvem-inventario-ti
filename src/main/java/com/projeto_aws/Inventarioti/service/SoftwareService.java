@@ -33,7 +33,7 @@ public class SoftwareService {
         }
 
         if (software.serial() != null){
-            atualizaSoftware.setSoftwareSerial(software.serial());
+            atualizaSoftware.setSerialSoftware(software.serial());
         }
 
         return softwareRepository.save(atualizaSoftware);

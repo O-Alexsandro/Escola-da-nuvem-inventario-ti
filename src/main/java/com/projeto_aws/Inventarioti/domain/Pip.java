@@ -1,8 +1,10 @@
 package com.projeto_aws.Inventarioti.domain;
 
-import com.projeto_aws.Inventarioti.dto.suprimentoDTO.CriarPibDTO;
+import com.projeto_aws.Inventarioti.dto.pipDTO.CriarPibDTO;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Pip")
@@ -18,10 +20,10 @@ public class Pip {
     private Long idPip;
     @Column(length = 100)
     private String nomePip;
-    private String descricaoPip;
+    private LocalDateTime dataCadastro;
 
     public Pip(CriarPibDTO suprimento) {
         this.nomePip = suprimento.nome();
-        this.descricaoPip = suprimento.descricao();
+        this.dataCadastro = LocalDateTime.now();
     }
 }

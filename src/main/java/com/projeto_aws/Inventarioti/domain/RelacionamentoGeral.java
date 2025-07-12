@@ -50,7 +50,7 @@ public class RelacionamentoGeral {
         departamento.setIdDepartamento(relacionamento.idDepartamento());
 
         this.usuario = new Usuario();
-        usuario.setIdUsusario(relacionamento.idUsuario());
+        usuario.setIdUsuario(relacionamento.idUsuario());
 
         this.maquina = new Maquina();
         maquina.setIdMaquina(relacionamento.idMaquina());

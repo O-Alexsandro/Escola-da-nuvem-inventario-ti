@@ -36,7 +36,7 @@ public class RelacionamentoGeralService {
     }
 
     public List<RelacionamentoGeral> buscarPorIdUsuario(Long idUsuario) {
-        return relacionamentoRepository.findByUsuarioIdUsusario(idUsuario);
+        return relacionamentoRepository.findByUsuarioIdUsuario(idUsuario);
     }
 
     public RelacionamentoGeral criarRelacionamento(CriarRelacionamentoDTO relacionamento){

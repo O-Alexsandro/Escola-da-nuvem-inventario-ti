@@ -1,8 +1,8 @@
 package com.projeto_aws.Inventarioti.controller;
 
 import com.projeto_aws.Inventarioti.domain.Pip;
-import com.projeto_aws.Inventarioti.dto.suprimentoDTO.AtualizarPibDTO;
-import com.projeto_aws.Inventarioti.dto.suprimentoDTO.CriarPibDTO;
+import com.projeto_aws.Inventarioti.dto.pipDTO.AtualizarPibDTO;
+import com.projeto_aws.Inventarioti.dto.pipDTO.CriarPibDTO;
 import com.projeto_aws.Inventarioti.service.PipService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

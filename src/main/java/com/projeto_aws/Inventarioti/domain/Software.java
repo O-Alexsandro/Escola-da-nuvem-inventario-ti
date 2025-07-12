@@ -4,8 +4,10 @@ import com.projeto_aws.Inventarioti.dto.softwareDTO.CriarSoftwareDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "softwares")
+@Table(name = "software")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,10 +21,12 @@ public class Software {
     @Column(length = 100)
     private String nomeSoftware;
     @Column(length = 100)
-    private String softwareSerial;
+    private String serialSoftware;
+    private LocalDateTime dataCadastro;
 
     public Software(CriarSoftwareDTO software) {
         this.nomeSoftware = software.nome();
-        this.softwareSerial = software.serial();
+        this.serialSoftware = software.serial();
+        this.dataCadastro = LocalDateTime.now();
     }
 }
