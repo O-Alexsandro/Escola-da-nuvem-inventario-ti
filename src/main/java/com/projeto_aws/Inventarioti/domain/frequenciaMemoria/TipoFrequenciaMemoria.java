@@ -1,8 +1,5 @@
 package com.projeto_aws.Inventarioti.domain.frequenciaMemoria;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum TipoFrequenciaMemoria {
     _200("200"),
     _266("266"),
@@ -31,18 +28,16 @@ public enum TipoFrequenciaMemoria {
         this.tipoFrequenciaMemoria = frequenciaMemoria;
     }
 
-    /** Valor que vai para JSON/banco (“3200” etc.) */
-    @JsonValue
-    public String getFrequenciaMemoria() {
+    public String getValor() {
         return tipoFrequenciaMemoria;
     }
 
-    /** Converte do texto recebido (“3200”) para o enum correspondente */
-    @JsonCreator
-    public static TipoFrequenciaMemoria fromFrequenciaMemoria(String frequenciaMemoria) {
-        for (TipoFrequenciaMemoria f : values()) {
-            if (f.tipoFrequenciaMemoria.equals(frequenciaMemoria)) return f;
+    public static TipoFrequenciaMemoria fromFrequenciaMemoria(String valor) {
+        for (TipoFrequenciaMemoria tipo : values()) {
+            if (tipo.getValor().equals(valor)) {
+                return tipo;
+            }
         }
-        throw new IllegalArgumentException("Frequência inválida: " + frequenciaMemoria);
+        throw new IllegalArgumentException("Frequência inválida: " + valor);
     }
 }

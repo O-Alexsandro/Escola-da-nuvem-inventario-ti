@@ -1,22 +1,22 @@
 package com.projeto_aws.Inventarioti.dto.maquinaDTO;
 
-import com.projeto_aws.Inventarioti.domain.maquina.FrequenciaMemoria;
-import com.projeto_aws.Inventarioti.domain.maquina.MarcaProcessador;
-import com.projeto_aws.Inventarioti.domain.maquina.ModeloMemoria;
-import com.projeto_aws.Inventarioti.domain.maquina.TipoArmazenamento;
+import com.projeto_aws.Inventarioti.domain.frequenciaMemoria.TipoFrequenciaMemoria;
+import com.projeto_aws.Inventarioti.domain.marcaProcessador.NomeMarcaProcessador;
+import com.projeto_aws.Inventarioti.domain.modeloMemoria.TipoModeloMemoria;
+import com.projeto_aws.Inventarioti.domain.unidadeArmazenamento.TipoArmazenamento;
 import jakarta.validation.constraints.NotNull;
 
 public record CriarMaquinaDTO(
         @NotNull
         String placaMae,
         @NotNull
-        MarcaProcessador marcaProcessador,
+        NomeMarcaProcessador marcaProcessador,
         @NotNull
         String processador,
         @NotNull
-        ModeloMemoria modeloMemoria,
+        TipoModeloMemoria modeloMemoria,
         @NotNull
-        FrequenciaMemoria frequenciaMemoria,
+        TipoFrequenciaMemoria frequenciaMemoria,
         @NotNull
         Long quantidadeMemoria,
         @NotNull

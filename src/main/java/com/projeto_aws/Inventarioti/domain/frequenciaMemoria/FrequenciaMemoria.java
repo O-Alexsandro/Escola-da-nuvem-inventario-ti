@@ -1,8 +1,12 @@
 package com.projeto_aws.Inventarioti.domain.frequenciaMemoria;
 
-import com.projeto_aws.Inventarioti.domain.modeloMemoria.TipoModeloMemoria;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.event.spi.EventType;
+
+import static org.hibernate.event.spi.EventType.values;
 
 @Entity
 @Table(name = "tipoFrequenciaMemoria")
