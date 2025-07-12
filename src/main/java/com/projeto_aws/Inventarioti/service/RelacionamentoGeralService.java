@@ -1,9 +1,9 @@
 package com.projeto_aws.Inventarioti.service;
 
-import com.projeto_aws.Inventarioti.domain.RelacionamentoGeral;
+import com.projeto_aws.Inventarioti.domain.UsuMaqSoftPip;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.AtualizarRelacionamentoDTO;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.CriarRelacionamentoDTO;
-import com.projeto_aws.Inventarioti.repository.RelacionamentoRepository;
+import com.projeto_aws.Inventarioti.repository.UsuMaqSoftPipRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 public class RelacionamentoGeralService {
 
     @Autowired
-    private RelacionamentoRepository relacionamentoRepository;
+    private UsuMaqSoftPipRepository usuMaqSoftPipRepository;
 
     @Autowired
     private DepartamentoService departamentoService;
@@ -31,21 +31,21 @@ public class RelacionamentoGeralService {
     @Autowired
     private PipService pipService;
 
-    public List<RelacionamentoGeral> listarRelacionamentos(){
-        return relacionamentoRepository.findAll();
+    public List<UsuMaqSoftPip> listarRelacionamentos(){
+        return usuMaqSoftPipRepository.findAll();
     }
 
-    public List<RelacionamentoGeral> buscarPorIdUsuario(Long idUsuario) {
-        return relacionamentoRepository.findByUsuarioIdUsuario(idUsuario);
+    public List<UsuMaqSoftPip> buscarPorIdUsuario(Long idUsuario) {
+        return usuMaqSoftPipRepository.findByUsuarioIdUsuario(idUsuario);
     }
 
-    public RelacionamentoGeral criarRelacionamento(CriarRelacionamentoDTO relacionamento){
-        RelacionamentoGeral novoRelacionamento = new RelacionamentoGeral(relacionamento);
-        return relacionamentoRepository.save(novoRelacionamento);
+    public UsuMaqSoftPip criarRelacionamento(CriarRelacionamentoDTO relacionamento){
+        UsuMaqSoftPip novoRelacionamento = new UsuMaqSoftPip(relacionamento);
+        return usuMaqSoftPipRepository.save(novoRelacionamento);
     }
 
-    public RelacionamentoGeral atualizarRelacionamento(AtualizarRelacionamentoDTO relacionamento){
-        RelacionamentoGeral atualizaRelacionamento = relacionamentoRepository.findById(relacionamento.idRelacionamento()).orElseThrow(()-> new EntityNotFoundException("Relacionamento não encontrado com o ID informado"));
+    public UsuMaqSoftPip atualizarRelacionamento(AtualizarRelacionamentoDTO relacionamento){
+        UsuMaqSoftPip atualizaRelacionamento = usuMaqSoftPipRepository.findById(relacionamento.idRelacionamento()).orElseThrow(()-> new EntityNotFoundException("Relacionamento não encontrado com o ID informado"));
 
         // Se o departamento não estiver nulo,
         // ele chama o metodo de atualizar o departamento e atualiza conforme os dados passados
@@ -68,20 +68,20 @@ public class RelacionamentoGeralService {
         if (relacionamento.suprimento() != null){
             pipService.atualizarPib(relacionamento.suprimento());
         }
-        return relacionamentoRepository.save(atualizaRelacionamento);
+        return usuMaqSoftPipRepository.save(atualizaRelacionamento);
     }
 
     public void deletarRelacionamento(Long idRelacionamento){
-        RelacionamentoGeral atualizaRelacionamento = relacionamentoRepository.findById(idRelacionamento).orElseThrow(()-> new EntityNotFoundException("Relacionamento não encontrado com o ID informado"));
-        relacionamentoRepository.delete(atualizaRelacionamento);
+        UsuMaqSoftPip atualizaRelacionamento = usuMaqSoftPipRepository.findById(idRelacionamento).orElseThrow(()-> new EntityNotFoundException("Relacionamento não encontrado com o ID informado"));
+        usuMaqSoftPipRepository.delete(atualizaRelacionamento);
     }
     // Conta quantos registros tem na tabela de relacionamento
     public Long quantidadeRegistro(){
-        return relacionamentoRepository.count();
+        return usuMaqSoftPipRepository.count();
     }
 
     // retorna o ultimo cadastro de relacionamento
-    public RelacionamentoGeral buscarUltimoCadastro(){
-        return relacionamentoRepository.findFirstByOrderByDataRegistroDesc().orElseThrow(null);
+    public UsuMaqSoftPip buscarUltimoCadastro(){
+        return usuMaqSoftPipRepository.findFirstByOrderByDataCadastroDesc().orElseThrow(null);
     }
 }

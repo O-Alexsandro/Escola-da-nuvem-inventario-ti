@@ -1,12 +1,10 @@
 package com.projeto_aws.Inventarioti.controller;
 
-import com.projeto_aws.Inventarioti.domain.RelacionamentoGeral;
+import com.projeto_aws.Inventarioti.domain.UsuMaqSoftPip;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.AtualizarRelacionamentoDTO;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.CriarRelacionamentoDTO;
 import com.projeto_aws.Inventarioti.service.RelacionamentoGeralService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +19,13 @@ public class RelacionamentoController {
     private RelacionamentoGeralService relacionamentoGeralService;
 
     @GetMapping
-    public ResponseEntity<List<RelacionamentoGeral>> listarRelacionamentos(){
-        List<RelacionamentoGeral> relacionamentos = relacionamentoGeralService.listarRelacionamentos();
+    public ResponseEntity<List<UsuMaqSoftPip>> listarRelacionamentos(){
+        List<UsuMaqSoftPip> relacionamentos = relacionamentoGeralService.listarRelacionamentos();
         return ResponseEntity.ok(relacionamentos);
     }
 
     @GetMapping("/{idUsuario}")
-    public List<RelacionamentoGeral> buscarPorUsuario(@PathVariable Long idUsuario) {
+    public List<UsuMaqSoftPip> buscarPorUsuario(@PathVariable Long idUsuario) {
         return relacionamentoGeralService.buscarPorIdUsuario(idUsuario);
     }
 
@@ -37,19 +35,19 @@ public class RelacionamentoController {
     }
 
     @GetMapping("/cadastro")
-    public ResponseEntity<RelacionamentoGeral> buscarUltimoCadastro(){
+    public ResponseEntity<UsuMaqSoftPip> buscarUltimoCadastro(){
         return ResponseEntity.ok(relacionamentoGeralService.buscarUltimoCadastro());
     }
 
     // Cria o relacionamento a partir de entidades existentes
     @PostMapping
-    public ResponseEntity<RelacionamentoGeral> criarRelacionamento(@RequestBody @Valid CriarRelacionamentoDTO relacionamento){
+    public ResponseEntity<UsuMaqSoftPip> criarRelacionamento(@RequestBody @Valid CriarRelacionamentoDTO relacionamento){
         var novoRecionamento = relacionamentoGeralService.criarRelacionamento(relacionamento);
         return ResponseEntity.ok(novoRecionamento);
     }
 
     @PutMapping
-    public ResponseEntity<RelacionamentoGeral> atualizarRelacionamento(@RequestBody @Valid AtualizarRelacionamentoDTO relacionamento){
+    public ResponseEntity<UsuMaqSoftPip> atualizarRelacionamento(@RequestBody @Valid AtualizarRelacionamentoDTO relacionamento){
         var atualizaRelacionamento = relacionamentoGeralService.atualizarRelacionamento(relacionamento);
         return ResponseEntity.ok(atualizaRelacionamento);
     }

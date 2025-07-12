@@ -2,6 +2,7 @@ package com.projeto_aws.Inventarioti.domain.frequenciaMemoria;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.projeto_aws.Inventarioti.utils.FrequenciaMemoriaConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.event.spi.EventType;
@@ -20,7 +21,7 @@ public class FrequenciaMemoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFrequenciaMemoria;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = FrequenciaMemoriaConverter.class)
     @Column(length = 4, name = "frequenciaMemoria")
     private TipoFrequenciaMemoria frequenciaMemoria;
 }

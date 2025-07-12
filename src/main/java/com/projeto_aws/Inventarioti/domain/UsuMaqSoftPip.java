@@ -1,54 +1,44 @@
 package com.projeto_aws.Inventarioti.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto_aws.Inventarioti.domain.maquina.Maquina;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.CriarRelacionamentoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "relacionamentogeral")
+@Table(name = "usuMaqSoftPip")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class RelacionamentoGeral {
+@EqualsAndHashCode(of = "idUsuMaqSoftPip")
+public class UsuMaqSoftPip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRelacionamento;
+    private Long idUsuMaqSoftPip;
 
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "idDepartamento", nullable = false)
-    private Departamento departamento;
-
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
-
-    @ManyToOne
-    @JoinColumn(name = "idMaquina", nullable = false)
-    private Maquina maquina;
 
     @ManyToOne
     @JoinColumn(name = "idSoftware")
     private Software software;
 
     @ManyToOne
+    @JoinColumn(name = "idMaquina")
+    private Maquina maquina;
+
+    @ManyToOne
     @JoinColumn(name = "idPip")
     private Pip pip;
 
-    @Column(name = "data_registro")
-    private LocalDate dataRegistro;
+    private LocalDateTime dataCadastro;
 
-    public RelacionamentoGeral(CriarRelacionamentoDTO relacionamento) {
-        this.departamento = new Departamento();
-        departamento.setIdDepartamento(relacionamento.idDepartamento());
-
+    public UsuMaqSoftPip(CriarRelacionamentoDTO relacionamento) {
         this.usuario = new Usuario();
         usuario.setIdUsuario(relacionamento.idUsuario());
 
@@ -61,6 +51,6 @@ public class RelacionamentoGeral {
         this.pip = new Pip();
         pip.setIdPip(relacionamento.idPip());
 
-        this.dataRegistro = LocalDate.now();
+        this.dataCadastro = LocalDateTime.now();
     }
 }

@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "usuariosSistema")
+@Table(name = "usuarioSistema")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,7 +21,6 @@ public class UsuarioSistema implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario_sistema")
     private Long idUsuarioSistema;
 
     @Column(length = 100)

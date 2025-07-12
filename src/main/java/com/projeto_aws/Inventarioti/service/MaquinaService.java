@@ -1,20 +1,19 @@
 package com.projeto_aws.Inventarioti.service;
 
 import com.projeto_aws.Inventarioti.domain.frequenciaMemoria.FrequenciaMemoria;
+import com.projeto_aws.Inventarioti.domain.frequenciaMemoria.TipoFrequenciaMemoria;
 import com.projeto_aws.Inventarioti.domain.maquina.Maquina;
+import com.projeto_aws.Inventarioti.domain.marcaProcessador.MarcaProcessador;
 import com.projeto_aws.Inventarioti.domain.modeloMemoria.ModeloMemoria;
-import com.projeto_aws.Inventarioti.domain.modeloMemoria.TipoModeloMemoria;
 import com.projeto_aws.Inventarioti.domain.unidadeArmazenamento.UnidadeArmazenamento;
 import com.projeto_aws.Inventarioti.dto.maquinaDTO.AtualizarMaquinaDTO;
 import com.projeto_aws.Inventarioti.dto.maquinaDTO.CriarMaquinaDTO;
-import com.projeto_aws.Inventarioti.repository.FrequenciaMemoriaRepository;
-import com.projeto_aws.Inventarioti.repository.MaquinaRepository;
-import com.projeto_aws.Inventarioti.repository.ModeloMemoriaRepository;
-import com.projeto_aws.Inventarioti.repository.UnidadeArmazenamentoRepositoy;
+import com.projeto_aws.Inventarioti.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +32,9 @@ public class MaquinaService {
     @Autowired
     private UnidadeArmazenamentoRepositoy unidadeArmazenamentoRepositoy;
 
+    @Autowired
+    private MarcaProcessadorRepository marcaProcessadorRepository;
+
     public List<Maquina> listarMaquinas(){
         return maquinaRepository.findAll();
     }
@@ -42,7 +44,27 @@ public class MaquinaService {
     }
 
     public Maquina criarMaquina(CriarMaquinaDTO maquina){
-        Maquina novaMaquina = new Maquina(maquina);
+        MarcaProcessador marcaProcessador = marcaProcessadorRepository.findByNomeMarcaProcessador(maquina.marcaProcessador());
+        ModeloMemoria modeloMemoria = modeloMemoriaRepository.findByModeloMemoria(maquina.modeloMemoria());
+
+        // Pega o tipo de frequencia que chega na req
+        TipoFrequenciaMemoria tipoFrequenciaMemoria = maquina.frequenciaMemoria();
+
+        // Verifica se a frequencia existe no banco
+        Optional<FrequenciaMemoria> frequenciaMemoria = frequenciaMemoriaRepository.findByFrequenciaMemoria(tipoFrequenciaMemoria);
+
+        UnidadeArmazenamento unidadeArmazenamento = unidadeArmazenamentoRepositoy.findByTipoArmazenamento(maquina.tipoArmazenamento());
+
+        Maquina novaMaquina = new Maquina();
+        novaMaquina.setPlacaMae(maquina.placaMae());
+        novaMaquina.setMarcaProcessador(marcaProcessador);
+        novaMaquina.setProcessador(maquina.processador());
+        novaMaquina.setModeloMemoria(modeloMemoria);
+        novaMaquina.setFrequenciaMemoria(frequenciaMemoria.orElseThrow(()-> new EntityNotFoundException("Frequencia não localizada")));
+        novaMaquina.setQuantidadeMemoria(maquina.quantidadeMemoria());
+        novaMaquina.setTipoArmazenamento(unidadeArmazenamento);
+        novaMaquina.setQuantidadeArmazenamento(maquina.quantidadeArmazenamento());
+        novaMaquina.setDataCadastro(LocalDateTime.now());
         return maquinaRepository.save(novaMaquina);
     }
 
@@ -63,8 +85,8 @@ public class MaquinaService {
         }
 
         if (maquina.frequenciaMemoria() != null){
-            FrequenciaMemoria frequenciaMemoria = frequenciaMemoriaRepository.findByFrequenciaMemoria(maquina.frequenciaMemoria());
-            atualizaMaquina.setFrequenciaMemoria(frequenciaMemoria);
+            Optional<FrequenciaMemoria> frequenciaMemoria = frequenciaMemoriaRepository.findByFrequenciaMemoria(maquina.frequenciaMemoria());
+            atualizaMaquina.setFrequenciaMemoria(frequenciaMemoria.orElseThrow(()-> new EntityNotFoundException("Frequencia não localizada")));
         }
 
         if (maquina.quantidadeMemoria() != null){

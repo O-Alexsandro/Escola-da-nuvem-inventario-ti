@@ -1,8 +1,8 @@
 package com.projeto_aws.Inventarioti.domain.marcaProcessador;
 
 public enum NomeMarcaProcessador {
-    AMD("Amd"),
-    INTEL("Intel");
+    AMD("AMD"),
+    INTEL("INTEL");
 
     final String nomeMarcaProcessador;
 
