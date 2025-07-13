@@ -65,8 +65,8 @@ public class RelacionamentoGeralService {
             softwareService.atualizarSoftware(relacionamento.software());
         }
 
-        if (relacionamento.suprimento() != null){
-            pipService.atualizarPib(relacionamento.suprimento());
+        if (relacionamento.pip() != null){
+            pipService.atualizarPib(relacionamento.pip());
         }
         return usuMaqSoftPipRepository.save(atualizaRelacionamento);
     }

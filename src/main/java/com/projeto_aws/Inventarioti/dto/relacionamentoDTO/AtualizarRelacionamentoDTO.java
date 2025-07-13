@@ -14,5 +14,5 @@ public record AtualizarRelacionamentoDTO(
         AtualizarUsuarioDTO usuario,
         AtualizarMaquinaDTO maquina,
         AtualizarSoftwareDTO software,
-        AtualizarPibDTO suprimento
+        AtualizarPibDTO pip
 ) {}
