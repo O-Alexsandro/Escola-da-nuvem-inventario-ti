@@ -1,5 +1,16 @@
-FROM openjdk:17-jdk-slim
+FROM maven:3.8.4-openjdk-17 AS build
+
+COPY src /app/src
+COPY pom.xml /app
+
 WORKDIR /app
-COPY target/Inventario-TI-0.0.1-SNAPSHOT.jar app.jar
+RUN mvn clean install -X
+
+FROM eclipse-temurin:17-jre-alpine
+
+COPY --from=build /app/target/Inventario-TI-0.0.1-SNAPSHOT.jar /app/app.jar
+
+WORKDIR /app
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+CMD ["java", "-jar", "app.jar"]
