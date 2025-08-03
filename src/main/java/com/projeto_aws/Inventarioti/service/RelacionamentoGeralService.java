@@ -20,7 +20,7 @@ public class RelacionamentoGeralService {
     private DepartamentoService departamentoService;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioSistemaService usuarioSistemaService;
 
     @Autowired
     private MaquinaService maquinaService;
@@ -36,7 +36,7 @@ public class RelacionamentoGeralService {
     }
 
     public List<UsuMaqSoftPip> buscarPorIdUsuario(Long idUsuario) {
-        return usuMaqSoftPipRepository.findByUsuarioIdUsuario(idUsuario);
+        return usuMaqSoftPipRepository.findByUsuarioIdUsuarioSistema(idUsuario);
     }
 
     public UsuMaqSoftPip criarRelacionamento(CriarRelacionamentoDTO relacionamento){
@@ -54,7 +54,7 @@ public class RelacionamentoGeralService {
         }
 
         if (relacionamento.usuario() != null){
-            usuarioService.atualizarUsuario(relacionamento.usuario());
+            usuarioSistemaService.atualizarUsuarioSistema(relacionamento.usuario());
         }
 
         if (relacionamento.maquina() != null){

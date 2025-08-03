@@ -10,6 +10,8 @@ public record CriarUsuarioSistemaDTO(
         @Email
         String email,
         @NotNull
-        String senha
+        String senha,
+        @NotNull
+        Long idDepartamento
 ) {
 }

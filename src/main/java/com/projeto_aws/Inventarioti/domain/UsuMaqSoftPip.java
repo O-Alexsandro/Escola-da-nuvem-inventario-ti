@@ -1,6 +1,7 @@
 package com.projeto_aws.Inventarioti.domain;
 
 import com.projeto_aws.Inventarioti.domain.maquina.Maquina;
+import com.projeto_aws.Inventarioti.domain.usuarioSistema.UsuarioSistema;
 import com.projeto_aws.Inventarioti.dto.relacionamentoDTO.CriarRelacionamentoDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,8 +22,8 @@ public class UsuMaqSoftPip {
     private Long idUsuMaqSoftPip;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    @JoinColumn(name = "idUsuarioSistema")
+    private UsuarioSistema usuario;
 
     @ManyToOne
     @JoinColumn(name = "idSoftware")
@@ -39,8 +40,8 @@ public class UsuMaqSoftPip {
     private LocalDateTime dataCadastro;
 
     public UsuMaqSoftPip(CriarRelacionamentoDTO relacionamento) {
-        this.usuario = new Usuario();
-        usuario.setIdUsuario(relacionamento.idUsuario());
+        this.usuario = new UsuarioSistema();
+        usuario.setIdUsuarioSistema(relacionamento.idUsuario());
 
         this.maquina = new Maquina();
         maquina.setIdMaquina(relacionamento.idMaquina());

@@ -1,5 +1,6 @@
 package com.projeto_aws.Inventarioti.domain.usuarioSistema;
 
+import com.projeto_aws.Inventarioti.domain.Departamento;
 import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.CriarUsuarioSistemaDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,13 +33,22 @@ public class UsuarioSistema implements UserDetails {
 
     private String senha;
 
+    @ManyToOne
+    @JoinColumn(name = "idDepartamento")
+    private Departamento departamento;
+
     @Enumerated(EnumType.STRING)
     private RoleUsuario roleUsuario;
 
-    public UsuarioSistema(CriarUsuarioSistemaDTO usuarioSistema) {
+    private LocalDateTime dataCadastro;
+
+    public UsuarioSistema(CriarUsuarioSistemaDTO usuarioSistema, Departamento dpto) {
         this.nomeUsuario = usuarioSistema.nome();
         this.email = usuarioSistema.email();
+        this.senha = usuarioSistema.senha();
+        this.departamento = dpto;
         this.roleUsuario = RoleUsuario.ROLE_ADMIN;
+        this.dataCadastro = LocalDateTime.now();
     }
 
     @Override

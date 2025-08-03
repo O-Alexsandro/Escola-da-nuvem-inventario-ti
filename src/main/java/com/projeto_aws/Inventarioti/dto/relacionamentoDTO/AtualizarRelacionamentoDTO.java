@@ -5,13 +5,14 @@ import com.projeto_aws.Inventarioti.dto.maquinaDTO.AtualizarMaquinaDTO;
 import com.projeto_aws.Inventarioti.dto.softwareDTO.AtualizarSoftwareDTO;
 import com.projeto_aws.Inventarioti.dto.pipDTO.AtualizarPibDTO;
 import com.projeto_aws.Inventarioti.dto.usuarioDTO.AtualizarUsuarioDTO;
+import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.AtualizarUsuarioSistemaDTO;
 import jakarta.validation.constraints.NotNull;
 
 public record AtualizarRelacionamentoDTO(
         @NotNull
         Long idRelacionamento,
         AtualizarDepartamentoDTO departamento,
-        AtualizarUsuarioDTO usuario,
+        AtualizarUsuarioSistemaDTO usuario,
         AtualizarMaquinaDTO maquina,
         AtualizarSoftwareDTO software,
         AtualizarPibDTO pip

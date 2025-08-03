@@ -9,6 +9,7 @@ public record AtualizarUsuarioSistemaDTO(
         String nome,
         @Email
         String email,
-        String senha
+        String senha,
+        Long idDepartamento
 ) {
 }

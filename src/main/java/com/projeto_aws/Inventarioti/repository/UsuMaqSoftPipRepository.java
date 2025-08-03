@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuMaqSoftPipRepository extends JpaRepository<UsuMaqSoftPip, Long> {
-    List<UsuMaqSoftPip> findByUsuarioIdUsuario(Long idUsuario);
+    List<UsuMaqSoftPip> findByUsuarioIdUsuarioSistema(Long idUsuario);
 
     Optional<UsuMaqSoftPip> findFirstByOrderByDataCadastroDesc();
 }

@@ -1,15 +1,15 @@
 package com.projeto_aws.Inventarioti.service;
 
 import com.projeto_aws.Inventarioti.configuration.TokenService;
-import com.projeto_aws.Inventarioti.domain.Usuario;
+import com.projeto_aws.Inventarioti.domain.Departamento;
 import com.projeto_aws.Inventarioti.domain.usuarioSistema.UsuarioSistema;
 import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.AtualizarUsuarioSistemaDTO;
 import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.CriarUsuarioSistemaDTO;
 import com.projeto_aws.Inventarioti.dto.usuarioSistemaDTO.ResetarSenhaDTO;
+import com.projeto_aws.Inventarioti.repository.DepartamentoRepository;
 import com.projeto_aws.Inventarioti.repository.UsuarioSistemaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,12 +27,16 @@ public class UsuarioSistemaService implements UserDetailsService {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private DepartamentoRepository departamentoRepository;
+
     public List<UsuarioSistema> listarUsuariosSistema(){
         return usuarioSistemaRepository.findAll();
     }
 
     public UsuarioSistema criarUsuarioSistema(CriarUsuarioSistemaDTO usuarioSistema){
-        UsuarioSistema novoUsuarioSistema = new UsuarioSistema(usuarioSistema);
+        Departamento departamento = departamentoRepository.findById(usuarioSistema.idDepartamento()).orElseThrow(()-> new EntityNotFoundException("Departamento não localizado"));
+        UsuarioSistema novoUsuarioSistema = new UsuarioSistema(usuarioSistema, departamento);
         String senhaBcrypt = new BCryptPasswordEncoder().encode(usuarioSistema.senha());
         novoUsuarioSistema.setSenha(senhaBcrypt);
         return usuarioSistemaRepository.save(novoUsuarioSistema);
@@ -54,6 +58,10 @@ public class UsuarioSistemaService implements UserDetailsService {
             buscaUsuario.setSenha(senhaNova);
         }
 
+        if (usuarioSistema.idDepartamento() != null){
+            Departamento departamento = departamentoRepository.findById(usuarioSistema.idDepartamento()).orElseThrow(()-> new EntityNotFoundException("Departamento não localizado"));
+            buscaUsuario.setDepartamento(departamento);
+        }
         return usuarioSistemaRepository.save(buscaUsuario);
     }
 
@@ -77,5 +85,4 @@ public class UsuarioSistemaService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usuarioSistemaRepository.findByEmail(username);
     }
-
 }
