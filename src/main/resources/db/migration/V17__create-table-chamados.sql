@@ -1,0 +1,31 @@
+CREATE TABLE CHAMADOS(
+	ID_CHAMADO SERIAL NOT NULL,
+	TITULO_CHAMADO VARCHAR(100) NOT NULL,
+	DESCRICAO TEXT NOT NULL,
+	ID_PRIORIDADE INT NOT NULL,
+	ID_DEPARTAMENTO INT NOT NULL,
+	ANEXO BYTEA,
+	DATA_CADASTRO TIMESTAMP NOT NULL DEFAULT NOW(),
+	ID_STATUS INT NOT NULL,
+	ID_USUARIO_SISTEMA SERIAL NOT NULL,
+	PRIMARY KEY(ID_CHAMADO),
+	FOREIGN KEY(ID_PRIORIDADE) REFERENCES PRIORIDADE(ID_PRIORIDADE),
+	FOREIGN KEY(ID_DEPARTAMENTO) REFERENCES DEPARTAMENTO(ID_DEPARTAMENTO),
+	FOREIGN KEY(ID_STATUS) REFERENCES STATUS(ID_STATUS),
+	FOREIGN KEY(ID_USUARIO_SISTEMA) REFERENCES USUARIO_SISTEMA(ID_USUARIO_SISTEMA)
+);
+
+INSERT INTO CHAMADOS (TITULO_CHAMADO, DESCRICAO, ID_PRIORIDADE, ID_DEPARTAMENTO, ANEXO, ID_STATUS, ID_USUARIO_SISTEMA)
+VALUES ('Impressora da recepção não funciona', 'A impressora modelo XPTO parou de funcionar, não imprime e apresenta luz de erro piscando. Já tentei reiniciar.', 3, 1, NULL, 1,1);
+
+INSERT INTO CHAMADOS (TITULO_CHAMADO, DESCRICAO, ID_PRIORIDADE, ID_DEPARTAMENTO, ANEXO, ID_STATUS, ID_USUARIO_SISTEMA)
+VALUES ('Dúvida sobre o cálculo das férias', 'Gostaria de entender como o cálculo do terço de férias foi realizado no meu último holerite.', 2, 2, NULL, 2,1);
+
+INSERT INTO CHAMADOS (TITULO_CHAMADO, DESCRICAO, ID_PRIORIDADE, ID_DEPARTAMENTO, ANEXO, ID_STATUS, ID_USUARIO_SISTEMA)
+VALUES ('Solicitação de segunda via de nota fiscal', 'Preciso da segunda via da nota fiscal referente à compra do monitor Dell em 15/07.', 1, 3, NULL, 3,1);
+
+INSERT INTO CHAMADOS (TITULO_CHAMADO, DESCRICAO, ID_PRIORIDADE, ID_DEPARTAMENTO, ANEXO, ID_STATUS, ID_USUARIO_SISTEMA)
+VALUES ('Computador reiniciando sozinho', 'Meu computador está muito lento e tem reiniciado sem nenhum aviso prévio, principalmente ao abrir planilhas grandes.', 2, 1, NULL, 1,1);
+
+INSERT INTO CHAMADOS (TITULO_CHAMADO, DESCRICAO, ID_PRIORIDADE, ID_DEPARTAMENTO, ANEXO, ID_STATUS, ID_USUARIO_SISTEMA)
+VALUES ('Alteração de dados bancários', 'Solicito a alteração da minha conta para recebimento do salário. Seguem os novos dados no anexo (que seria enviado pela aplicação).', 2, 2, NULL, 3,1);

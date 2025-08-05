@@ -1,0 +1,61 @@
+package com.projeto_aws.Inventarioti.controller;
+
+import com.projeto_aws.Inventarioti.domain.Chamados;
+import com.projeto_aws.Inventarioti.dto.chamadosDTO.AtualizarChamadoDTO;
+import com.projeto_aws.Inventarioti.dto.chamadosDTO.RegistrarChamadoDTO;
+import com.projeto_aws.Inventarioti.service.ChamadosService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/chamados")
+public class ChamadosController {
+
+    @Autowired ChamadosService chamadosService;
+
+    @PostMapping("/registrar")
+    public ResponseEntity<Chamados> registrarChamado(@ModelAttribute RegistrarChamadoDTO registrarChamadoDTO,
+                                                     @RequestParam("anexo") MultipartFile anexo){
+        Chamados chamados = chamadosService.registrarChamado(registrarChamadoDTO, anexo);
+        return ResponseEntity.ok(chamados);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Chamados> listarChamadosPorId(@PathVariable Long id){
+        Chamados chamados = chamadosService.listarChamadosPorId(id);
+        return ResponseEntity.ok(chamados);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Chamados>> buscarChamados(){
+        List<Chamados> chamados = chamadosService.listarChamados();
+        return ResponseEntity.ok(chamados);
+    }
+
+    @PostMapping("/tratar")
+    public ResponseEntity<Chamados> atualizarTratativa(@RequestBody AtualizarChamadoDTO chamadoDTO){
+        return ResponseEntity.ok(chamadosService.atualizarTratativa(chamadoDTO));
+    }
+
+    @GetMapping("/{id}/anexo")
+    public ResponseEntity<byte[]> downloadAnexo(@PathVariable Long id) {
+        byte[] download = chamadosService.downloadAnexo(id);
+        String nomeArquivo = "anexo_" + id + ".png";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        headers.setContentDisposition(ContentDisposition.attachment().filename(nomeArquivo).build());
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(download);
+    }
+}
