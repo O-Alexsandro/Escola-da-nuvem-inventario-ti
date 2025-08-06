@@ -38,6 +38,11 @@ public class ChamadosService {
         return chamadosRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Chamado não encontrado com o ID informado"));
     }
 
+    public List<Chamados> ListarChamadosPorUsuarioLogado(){
+        var usuario = usuarioAutenticado.retornarUsuarioAutenticado();
+        List<Chamados> chamados = chamadosRepository.findByUsuarioSistemaIdUsuarioSistema(usuario.getIdUsuarioSistema());
+        return chamados;
+    }
 
     public Chamados registrarChamado(RegistrarChamadoDTO registrarChamadoDTO,
                                      MultipartFile anexo){

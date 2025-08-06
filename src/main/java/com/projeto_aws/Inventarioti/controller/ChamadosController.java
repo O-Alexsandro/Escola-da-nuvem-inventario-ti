@@ -33,6 +33,11 @@ public class ChamadosController {
         return ResponseEntity.ok(chamados);
     }
 
+    @GetMapping("/usuario")
+    public ResponseEntity<List<Chamados>> retornarChamadosDoUsuario(){
+        return ResponseEntity.ok(chamadosService.ListarChamadosPorUsuarioLogado());
+    }
+
     @GetMapping
     public ResponseEntity<List<Chamados>> buscarChamados(){
         List<Chamados> chamados = chamadosService.listarChamados();
