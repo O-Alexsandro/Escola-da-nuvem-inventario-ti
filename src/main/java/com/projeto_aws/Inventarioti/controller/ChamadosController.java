@@ -27,6 +27,7 @@ public class ChamadosController {
         return ResponseEntity.ok(chamados);
     }
 
+    // Não está em uso pelo usuário
     @GetMapping("/{id}")
     public ResponseEntity<Chamados> listarChamadosPorId(@PathVariable Long id){
         Chamados chamados = chamadosService.listarChamadosPorId(id);
@@ -38,16 +39,32 @@ public class ChamadosController {
         return ResponseEntity.ok(chamadosService.ListarChamadosPorUsuarioLogado());
     }
 
-    @GetMapping
-    public ResponseEntity<List<Chamados>> buscarChamados(){
-        List<Chamados> chamados = chamadosService.listarChamados();
-        return ResponseEntity.ok(chamados);
+    @GetMapping("/status/emAbertoEemTratativa")
+    public ResponseEntity<List<Chamados>> retornarChamadosDoUsuarioEmAbertoEEmTratativa(){
+        return ResponseEntity.ok(chamadosService.listarChamadosPorUsuarioLogadoStatusEmAbertoETratativa());
     }
 
-    @PostMapping("/tratar")
-    public ResponseEntity<Chamados> atualizarTratativa(@RequestBody AtualizarChamadoDTO chamadoDTO){
-        return ResponseEntity.ok(chamadosService.atualizarTratativa(chamadoDTO));
+    @GetMapping("/status/resolvido")
+    public ResponseEntity<List<Chamados>> retornarChamadosDoUsuarioResolvido(){
+        return ResponseEntity.ok(chamadosService.listarChamadosPorUsuarioLogadoStatusResolvido());
     }
+
+    @GetMapping("emAberto")
+    public ResponseEntity<Long> quantidadeChamadosEmAberto(){
+        return ResponseEntity.ok(chamadosService.quantidadeChamadosAbertosUsuario());
+    }
+
+    @GetMapping("emTratativa")
+    public ResponseEntity<Long> quantidadeChamadosEmTratativa(){
+        return ResponseEntity.ok(chamadosService.quantidadeChamadosAbertosEmTratativaUsuario());
+    }
+
+    @GetMapping("resolvido")
+    public ResponseEntity<Long> quantidadeChamadosResolvido(){
+        return ResponseEntity.ok(chamadosService.quantidadeChamadosAbertosResolvido());
+    }
+
+
 
     @GetMapping("/{id}/anexo")
     public ResponseEntity<byte[]> downloadAnexo(@PathVariable Long id) {

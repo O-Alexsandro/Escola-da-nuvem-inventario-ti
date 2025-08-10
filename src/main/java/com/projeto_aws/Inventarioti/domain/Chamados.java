@@ -47,6 +47,9 @@ public class Chamados {
     @JoinColumn(name = "idUsuarioSistema")
     private UsuarioSistema usuarioSistema;
 
+    @Column(name = "comentarioadmin")
+    private String comentarioAdmin;
+
     public Chamados(RegistrarChamadoDTO registrarChamadoDTO, MultipartFile anexo) throws IOException {
         this.tituloChamado = registrarChamadoDTO.tituloChamado();
         this.descricao = registrarChamadoDTO.descricao();
@@ -63,6 +66,8 @@ public class Chamados {
 
         this.status = new Status();
         status.setIdStatus(registrarChamadoDTO.IdStatus());
+
+        this.comentarioAdmin = "";
     }
 
     public Chamados(RegistrarChamadoDTO registrarChamadoDTO) {
@@ -78,5 +83,7 @@ public class Chamados {
 
         this.status = new Status();
         status.setIdStatus(registrarChamadoDTO.IdStatus());
+
+        this.comentarioAdmin = "";
     }
 }
