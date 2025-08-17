@@ -64,8 +64,6 @@ public class ChamadosController {
         return ResponseEntity.ok(chamadosService.quantidadeChamadosAbertosResolvido());
     }
 
-
-
     @GetMapping("/{id}/anexo")
     public ResponseEntity<byte[]> downloadAnexo(@PathVariable Long id) {
         byte[] download = chamadosService.downloadAnexo(id);
